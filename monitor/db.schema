@@ -1,0 +1,28 @@
+#DROP TABLE relay_stats;
+#DROP TABLE stat_runs;
+
+CREATE TABLE stat_runs(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  dt_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  listeners INT NOT NULL,
+  active BOOLEAN DEFAULT false
+);
+
+CREATE TABLE relay_stats(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  dt_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  run_id INT,
+  FOREIGN KEY (run_id) REFERENCES stat_runs(id),
+  url TEXT,
+  comment TEXT,
+  svers TEXT,
+  listeners INT,
+  max_listeners INT,
+  status TEXT NOT NULL,
+  http_status INT,
+  peak INT,
+  song TEXT,
+  server_status TEXT,
+  stream_status TEXT,
+  full_output TEXT
+);
